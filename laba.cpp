@@ -10,42 +10,42 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-// Очистка буфера ввода
+// РћС‡РёСЃС‚РєР° Р±СѓС„РµСЂР° РІРІРѕРґР°
 void ClearInputBuffer(char delimiter = '\n') {
     cin.clear();
     cin.ignore(std::numeric_limits<std::streamsize>::max(), delimiter);
 }
 
-// Проверка ввода на положительное число
+// РџСЂРѕРІРµСЂРєР° РІРІРѕРґР° РЅР° РїРѕР»РѕР¶РёС‚РµР»СЊРЅРѕРµ С‡РёСЃР»Рѕ
 bool ValidateInput(int number) {
     if (number <= 0) {
-        cout << "Число должно быть положительным!" << endl;
+        cout << "Р§РёСЃР»Рѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Рј!" << endl;
         return false;
     }
     return true;
 }
 
-// Проверка ввода на диапазон
+// РџСЂРѕРІРµСЂРєР° РІРІРѕРґР° РЅР° РґРёР°РїР°Р·РѕРЅ
 bool ValidateInput(int number, int minValue, int maxValue) {
     if (number < minValue || number > maxValue) {
-        cout << "Число должно быть в диапазоне от " << minValue << " до " << maxValue << "!" << endl;
+        cout << "Р§РёСЃР»Рѕ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РІ РґРёР°РїР°Р·РѕРЅРµ РѕС‚ " << minValue << " РґРѕ " << maxValue << "!" << endl;
         return false;
     }
     return true;
 }
 
-// Приведение символа к нижнему регистру (для русского и английского алфавитов)
+// РџСЂРёРІРµРґРµРЅРёРµ СЃРёРјРІРѕР»Р° Рє РЅРёР¶РЅРµРјСѓ СЂРµРіРёСЃС‚СЂСѓ (РґР»СЏ СЂСѓСЃСЃРєРѕРіРѕ Рё Р°РЅРіР»РёР№СЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚РѕРІ)
 char ToLower(char c) {
     if (c >= 'A' && c <= 'Z') {
-        return c + 32; // Преобразование английских букв
+        return c + 32; // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Р°РЅРіР»РёР№СЃРєРёС… Р±СѓРєРІ
     }
-    if (c >= 'А' && c <= 'Я') {
-        return c + 32; // Преобразование русских букв
+    if (c >= 'Рђ' && c <= 'РЇ') {
+        return c + 32; // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ СЂСѓСЃСЃРєРёС… Р±СѓРєРІ
     }
     return c;
 }
 
-// Обновление счётчика элементов массива
+// РћР±РЅРѕРІР»РµРЅРёРµ СЃС‡С‘С‚С‡РёРєР° СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР°
 void UpdateCount(int& count, int size) {
     if (count < 0) {
         count = 0;
@@ -55,48 +55,48 @@ void UpdateCount(int& count, int size) {
     }
 }
 
-// Изменение размера массива
+// РР·РјРµРЅРµРЅРёРµ СЂР°Р·РјРµСЂР° РјР°СЃСЃРёРІР°
 void EditSizeArray(int** array, int& size, int& count) {
-    cout << "Текущий размер массива: " << size << endl;
-    cout << "Хотите сохранить данные из текущего массива? (Да/Нет): ";
+    cout << "РўРµРєСѓС‰РёР№ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: " << size << endl;
+    cout << "РҐРѕС‚РёС‚Рµ СЃРѕС…СЂР°РЅРёС‚СЊ РґР°РЅРЅС‹Рµ РёР· С‚РµРєСѓС‰РµРіРѕ РјР°СЃСЃРёРІР°? (Р”Р°/РќРµС‚): ";
     char choice;
     cin >> choice;
     choice = ToLower(choice);
 
-    while (choice != 'д' && choice != 'н') {
-        cout << "Введите 'Да' или 'Нет': ";
+    while (choice != 'Рґ' && choice != 'РЅ') {
+        cout << "Р’РІРµРґРёС‚Рµ 'Р”Р°' РёР»Рё 'РќРµС‚': ";
         cin >> choice;
         choice = ToLower(choice);
     }
 
-    cout << "Введите новый размер массива: ";
+    cout << "Р’РІРµРґРёС‚Рµ РЅРѕРІС‹Р№ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: ";
     int newSize;
     while (!(cin >> newSize) || !ValidateInput(newSize)) {
-        cout << "Ошибка! Введите положительное число: ";
+        cout << "РћС€РёР±РєР°! Р’РІРµРґРёС‚Рµ РїРѕР»РѕР¶РёС‚РµР»СЊРЅРѕРµ С‡РёСЃР»Рѕ: ";
         ClearInputBuffer();
     }
 
-    int* newArray = new int[newSize](); // Инициализация нового массива + заполнение нулями
+    int* newArray = new int[newSize](); // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РЅРѕРІРѕРіРѕ РјР°СЃСЃРёРІР° + Р·Р°РїРѕР»РЅРµРЅРёРµ РЅСѓР»СЏРјРё
 
-    if (choice == 'д') {
+    if (choice == 'Рґ') {
         int elementsToCopy = (size < newSize) ? size : newSize;
         for (int i = 0; i < elementsToCopy; ++i) {
             newArray[i] = (*array)[i];
         }
         count = elementsToCopy;
-        cout << "Данные сохранены. Новый размер массива: " << newSize << endl;
+        cout << "Р”Р°РЅРЅС‹Рµ СЃРѕС…СЂР°РЅРµРЅС‹. РќРѕРІС‹Р№ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: " << newSize << endl;
     }
     else {
         count = 0;
-        cout << "Массив очищен. Новый размер массива: " << newSize << endl;
+        cout << "РњР°СЃСЃРёРІ РѕС‡РёС‰РµРЅ. РќРѕРІС‹Р№ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: " << newSize << endl;
     }
 
-    delete[] * array; // Освобождение старой памяти
-    *array = newArray; // передаём указателю адрес на новый массив
-    size = newSize; // Обновление размера
+    delete[] * array; // РћСЃРІРѕР±РѕР¶РґРµРЅРёРµ СЃС‚Р°СЂРѕР№ РїР°РјСЏС‚Рё
+    *array = newArray; // РїРµСЂРµРґР°С‘Рј СѓРєР°Р·Р°С‚РµР»СЋ Р°РґСЂРµСЃ РЅР° РЅРѕРІС‹Р№ РјР°СЃСЃРёРІ
+    size = newSize; // РћР±РЅРѕРІР»РµРЅРёРµ СЂР°Р·РјРµСЂР°
 }
 
-// Вычисление суммы элементов массива
+// Р’С‹С‡РёСЃР»РµРЅРёРµ СЃСѓРјРјС‹ СЌР»РµРјРµРЅС‚РѕРІ РјР°СЃСЃРёРІР°
 int CalculateSum(const int* array, int size) {
     int sum = 0;
     for (int i = 0; i < size; ++i) {
@@ -105,7 +105,7 @@ int CalculateSum(const int* array, int size) {
     return sum;
 }
 
-// Поиск максимального элемента в массиве
+// РџРѕРёСЃРє РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РІ РјР°СЃСЃРёРІРµ
 int FindMaxElement(const int* array, int size) {
     int maxElement = array[0];
     for (int i = 1; i < size; ++i) {
@@ -116,20 +116,20 @@ int FindMaxElement(const int* array, int size) {
     return maxElement;
 }
 
-// Вывод массива на экран
+// Р’С‹РІРѕРґ РјР°СЃСЃРёРІР° РЅР° СЌРєСЂР°РЅ
 void PrintArray(const int* array, int size, int count) {
     if (count == 0) {
-        cout << "Массив пуст. Заполните его и повторите попытку." << endl;
+        cout << "РњР°СЃСЃРёРІ РїСѓСЃС‚. Р—Р°РїРѕР»РЅРёС‚Рµ РµРіРѕ Рё РїРѕРІС‚РѕСЂРёС‚Рµ РїРѕРїС‹С‚РєСѓ." << endl;
         return;
     }
-    cout << "Элементы массива:" << endl;
+    cout << "Р­Р»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР°:" << endl;
     for (int i = 0; i < size; ++i) {
         cout << array[i] << " ";
     }
     cout << endl;
 }
 
-// Заполнение массива случайными числами
+// Р—Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІР° СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё
 void FillArrayRandom(int* array, int size, int& count) {
     std::random_device rd;
     std::mt19937 mersenne(rd());
@@ -142,56 +142,56 @@ void FillArrayRandom(int* array, int size, int& count) {
     }
 }
 
-// Ручное заполнение массива
+// Р СѓС‡РЅРѕРµ Р·Р°РїРѕР»РЅРµРЅРёРµ РјР°СЃСЃРёРІР°
 void FillArray(int* array, int size, int& count) {
-    cout << "Введите элементы массива:" << endl;
+    cout << "Р’РІРµРґРёС‚Рµ СЌР»РµРјРµРЅС‚С‹ РјР°СЃСЃРёРІР°:" << endl;
     UpdateCount(count, size);
     for (int i = count; i < size; ++i) {
-        cout << "Элемент " << i + 1 << ": ";
+        cout << "Р­Р»РµРјРµРЅС‚ " << i + 1 << ": ";
         while (!(cin >> array[i])) {
-            cout << "Ошибка! Введите число: ";
+            cout << "РћС€РёР±РєР°! Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ: ";
             ClearInputBuffer();
         }
         count++;
     }
 }
 
-// Вывод информации о массиве
+// Р’С‹РІРѕРґ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РјР°СЃСЃРёРІРµ
 void PrintArrayInfo(const int* array, int size, int count) {
     PrintArray(array, size, count);
     if (count > 0) {
-        cout << "Максимальный элемент: " << FindMaxElement(array, size) << endl;
-        cout << "Сумма элементов: " << CalculateSum(array, size) << endl;
+        cout << "РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚: " << FindMaxElement(array, size) << endl;
+        cout << "РЎСѓРјРјР° СЌР»РµРјРµРЅС‚РѕРІ: " << CalculateSum(array, size) << endl;
     }
 }
 
 int main() {
-    int count = 0; // Количество заполненных элементов
+    int count = 0; // РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РїРѕР»РЅРµРЅРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
     int choice;
     SetConsoleCP(1251); 
     SetConsoleOutputCP(1251);
 
-    cout << "Введите размер массива: ";
+    cout << "Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: ";
     int size;
     while (!(cin >> size) || !ValidateInput(size)) {
-        cout << "Ошибка! Введите положительное число: ";
+        cout << "РћС€РёР±РєР°! Р’РІРµРґРёС‚Рµ РїРѕР»РѕР¶РёС‚РµР»СЊРЅРѕРµ С‡РёСЃР»Рѕ: ";
         ClearInputBuffer();
     }
 
-    int* array = new int[size](); // Динамическое выделение памяти для массива + заполнение нулями
+    int* array = new int[size](); // Р”РёРЅР°РјРёС‡РµСЃРєРѕРµ РІС‹РґРµР»РµРЅРёРµ РїР°РјСЏС‚Рё РґР»СЏ РјР°СЃСЃРёРІР° + Р·Р°РїРѕР»РЅРµРЅРёРµ РЅСѓР»СЏРјРё
 
     while (true) {
         cout << "----------------------------------------" << endl;
-        cout << "Меню:" << endl;
-        cout << "1. Заполнить массив вручную" << endl;
-        cout << "2. Заполнить массив случайными числами" << endl;
-        cout << "3. Вывести массив" << endl;
-        cout << "4. Изменить размер массива" << endl;
-        cout << "5. Выход" << endl;
+        cout << "РњРµРЅСЋ:" << endl;
+        cout << "1. Р—Р°РїРѕР»РЅРёС‚СЊ РјР°СЃСЃРёРІ РІСЂСѓС‡РЅСѓСЋ" << endl;
+        cout << "2. Р—Р°РїРѕР»РЅРёС‚СЊ РјР°СЃСЃРёРІ СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё" << endl;
+        cout << "3. Р’С‹РІРµСЃС‚Рё РјР°СЃСЃРёРІ" << endl;
+        cout << "4. РР·РјРµРЅРёС‚СЊ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°" << endl;
+        cout << "5. Р’С‹С…РѕРґ" << endl;
         cout << "----------------------------------------" << endl;
-        cout << "Выберите действие: ";
+        cout << "Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ: ";
         while (!(cin >> choice) || !ValidateInput(choice, 1, 5)) {
-            cout << "Ошибка! Введите число от 1 до 5: ";
+            cout << "РћС€РёР±РєР°! Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РѕС‚ 1 РґРѕ 5: ";
             ClearInputBuffer();
         }
 
@@ -211,10 +211,10 @@ int main() {
             EditSizeArray(&array, size, count);
             break;
         case 5:
-            delete[] array; // Освобождение памяти 
+            delete[] array; // РћСЃРІРѕР±РѕР¶РґРµРЅРёРµ РїР°РјСЏС‚Рё 
             return 0;
         default:
-            cout << "Неизвестная ошибка!" << endl;
+            cout << "РќРµРёР·РІРµСЃС‚РЅР°СЏ РѕС€РёР±РєР°!" << endl;
             break;
         }
     }
